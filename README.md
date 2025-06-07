@@ -43,7 +43,7 @@ cp .env.example .env
 ### 4. Run app
 
 cd server
-node index.js
+node index.js || npm start || npm run dev
 
 cd client
 npm start
