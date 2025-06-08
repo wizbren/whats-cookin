@@ -65,8 +65,8 @@ psql -d whatscookin -f src/db/seed.sql
 Make sure your backend has a .env file that includes:
 ```
 DB_NAME=whatscookin
-DB_USER=your_postgres_username
-DB_PASSWORD=your_password
+DB_USER=<your_postgres_username>
+DB_PASSWORD=<your_password>
 DB_HOST=localhost
 DB_PORT=5432
 ```
