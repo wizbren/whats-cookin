@@ -1,4 +1,9 @@
 import { useEffect, useState } from 'react';
+import Login from './components/Login';
+import Main from './components/Main';
+import Modal from './components/Modal';
+import User from './components/User';
+import './styles/main.scss';
 
 
 function App() {
@@ -12,7 +17,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className='App' >
       <h1>What's Cookin'</h1>
       <p>Message from API: {apiMessage}</p>
     </div>
