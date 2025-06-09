@@ -24,7 +24,7 @@ function App() {
         <Header user={user} />     {/* renders Header at the top */}
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Main/>} />
+          <Route path="/" element={<Main showModal={false} />} />
           {/* Add other routes here, e.g. */}
           {/* <Route path="/" element={<Home />} /> */}
         </Routes>
