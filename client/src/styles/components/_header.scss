@@ -2,7 +2,7 @@
 
 .header {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: space-between;
   padding: 1rem;
   background-color: $header;
@@ -18,7 +18,7 @@
   .header-left {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 
     .user-name {
       font-weight: bold;
@@ -27,6 +27,7 @@
 
     .header-buttons {
       display: flex;
+      align-items: center;
       flex-direction: column;
       gap: 0.5rem;
 
@@ -43,16 +44,20 @@
   }
 
   .header-center {
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    align-items: center;
+    justify-content: center;
 
     .project-title {
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 3rem;
     }
 
-    .credits {
+    .project-credits {
       font-size: 0.75rem;
-      margin-top: 0.25rem;
+      margin-bottom: 0.25;
     }
   }
 }
