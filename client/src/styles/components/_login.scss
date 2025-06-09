@@ -1,0 +1,15 @@
+// @import 'variables';
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+  background-color: #f5f5f5;  //this will actually be from /variables
+
+  .btn {
+    margin: .3em;
+  }
+}
