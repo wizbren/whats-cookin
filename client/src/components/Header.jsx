@@ -16,7 +16,10 @@ export default function Header({ user }) {
 
       {/* MIDDLE BOX BELOW */}
       <div className="header-section header-center">
-        <h1 className="project-title">What's Cookin'?</h1>
+        <h1 className="project-title">
+          What's <br />
+          Cookin'?
+        </h1>
         <p className="project-credits">
           Created by <br />
           Jesse Miller - Boxin Cao - Brendan Brown
