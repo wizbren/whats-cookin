@@ -1,30 +1,28 @@
-import { useState } from "react";
-// Add import for whatever the bootstrap Modal needs, here
+import useAppData from "../hooks/useAppData";   //for custom hook
 
 
 const Main = () => {
-  const [input, setInput] = useState("");
+  const {prompt, setPrompt, fetchRecipes} = useAppData();  //use shared state + logic
 
   const handleChange = (event) => {
-    setInput(event.target.value);
+    setPrompt(event.target.value);        // update string in shared prompt state
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();             
-    console.log("user prompt:", input);  // PLACEHOLDER OpenAI stuff goes here (I think)
+    event.preventDefault();               // prevents page reload
+    fetchRecipes();                       //run recipe search (triggers OpenAI => Edamam logic)
   };
 
   return (
     <div className="main-view">
-      {/* PLACEHOLDER for Modal bootstrap (I think) */}
 
       <form className="prompt-form" onSubmit={handleSubmit}>
         <textarea
-          value={input}
+          value={prompt}                   // control shared state
           onChange={handleChange}
           placeholder="What's on the menu, Chef?"
           className="prompt-textarea"
-          rows={5}                        //change this for prompt input size
+          rows={5}                         //*change this for prompt box size
         />
         <button type="submit" className="prompt-icon-btn">
           <svg
