@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Main from "./components/Main";
-import Modal from './components/Modal'
 import ModalComponent from './components/Modal';
 import Header from "./components/Header";
 import "./styles/main.scss";
 
 function App() {
   const [apiMessage, setApiMessage] = useState("");
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const user = "User 1"; //TEMPORARY HARDCORE FOR TESTING
 
   useEffect(() => {
