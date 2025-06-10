@@ -6,7 +6,7 @@ const ModalComponent = ({ show, onClose }) => {
       <Modal.Header closeButton>
         <Modal.Title>What’s Cookin’</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{/* recipe from api */}</Modal.Body>
+      <Modal.Body>This is where the recipe will go once we fetch it from the API</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>
           Close
