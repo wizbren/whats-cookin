@@ -3,7 +3,7 @@ import Login from "./components/Login";
 import Main from "./components/Main";
 import ModalComponent from "./components/Modal";
 import Header from "./components/Header";
-import useAppData from "./hooks/UseAppData";
+import useAppData from "./hooks/useAppData";
 import "./styles/main.scss";
 
 
