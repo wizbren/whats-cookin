@@ -12,8 +12,8 @@ function App() {
     apiMessage,
     modalOpen,
     setModalOpen,
-    likedStatus, //pass down as a prop to users when we make the route
-    toggleLikedStatus, //pass down as a prop to users when we make the route
+    likedStatus, //pass down as a prop to users when we make the route (and import recipeFavButton)
+    toggleLikedStatus, //pass down as a prop to users when we make the route (and import recipeFavButton)
   } = useAppData();
 
   return (
