@@ -78,3 +78,9 @@ node index.js || npm start || npm run dev
 
 cd client
 npm start
+
+### 6. Database Setup
+
+createdb db
+psql -d db -f server/src/db/schema.sql
+psql -d db -f server/src/db/mockdata.sql
