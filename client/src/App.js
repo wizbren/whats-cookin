@@ -8,7 +8,7 @@ import "./styles/main.scss";
 
 function App() {
   const [apiMessage, setApiMessage] = useState("");
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const user = "User 1"; //TEMPORARY HARDCORE FOR TESTING
 
   useEffect(() => {
