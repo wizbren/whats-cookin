@@ -1,0 +1,34 @@
+@import '../variables';
+
+.modal-content {
+  background-color: $background;  
+  color: $text;                
+  border-radius: 10px;
+  font-family: $font-base;
+}
+
+.modal-header {
+  background-color: $header;
+  color: $text;
+
+  .btn-close {
+    filter: invert(1); // makes the close button white-ish
+  }
+}
+
+.modal-body {
+  background-color: $modal;
+}
+
+.modal .modal-footer {
+  background-color: $header;
+}
+
+.modal .btn-secondary {
+  background-color: $extra;
+  border-color: $modal;
+
+  &:hover {
+    background-color: darken($extra, 10%);
+  }
+}
