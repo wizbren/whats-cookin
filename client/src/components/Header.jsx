@@ -15,7 +15,9 @@ export default function Header(props) {
     <nav className="header">
       {/* LEFT BOX BELOW */}
       <div className="header-section header-left">
-        <p className="user-name"> {user} </p>
+          <p className="user-name">
+            {user ? `Logged in as: User ${user}` : 'User Not Logged In' }
+          </p>
         <div className="header-buttons">
           <button className="header-btn" onClick={handleLogout}>
             Logout
