@@ -1,0 +1,42 @@
+@import '../_variables';
+
+.main-view {
+  background-color: $background;
+  min-height: calc(100vh - 80px); // adjust based on your actual header height
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.prompt-form {
+  background-color: $modal;
+  padding: 0.25rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.prompt-textarea {
+  flex-grow: 1;
+  font-family: $font-base;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: none;
+  resize: none;
+  outline: none;
+  background-color: transparent;
+  color: $background;
+}
+
+.prompt-icon-btn {
+  background: none;
+  border: none;
+  color: $background;
+  padding: 0.5rem;
+  cursor: pointer;
+}
