@@ -14,7 +14,7 @@ const Login = (props) => {
   };
 
   return (
-    <div className="login">
+    <div className="login" style={{ backgroundImage: "url('/images/food.png')" }}>
       <button className="btn btn-success btn-lg" onClick={() => handleLogin(1)}>
         User 1
       </button>
