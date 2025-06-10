@@ -1,20 +1,19 @@
-const Modal = ({ onClose }) => {
-  const handleOverlayClick = (event) => {
-    // Only close if the user clicks *on the overlay*, not inside the modal
-    if (event.target.classList.contains('modal-overlay')) {
-      onClose();
-    }
-  };
+import { Modal, Button } from "react-bootstrap";
 
+const ModalComponent = ({ show, onClose }) => {
   return (
-    <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal">
-        <button className="modal-close" onClick={onClose}>&times;</button>
-        <h2>Modal Title</h2>
-        <p>Modal content goes here.</p>
-      </div>
-    </div>
+    <Modal show={show} onHide={onClose} backdrop="static" centered>
+      <Modal.Header closeButton>
+        <Modal.Title>What’s Cookin’</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>{/* recipe from api */}</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onClose}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
-export default Modal;
+export default ModalComponent;

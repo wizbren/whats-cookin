@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Main from "./components/Main";
-import User from "./components/User";
+import Modal from './components/Modal'
+import ModalComponent from './components/Modal';
 import Header from "./components/Header";
 import "./styles/main.scss";
 
@@ -24,8 +25,9 @@ function App() {
         <Header user={user} />     {/* renders Header at the top */}
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Main showModal={modalOpen} setModalOpen={setModalOpen} />} />
+          <Route path="/" element={<Main />} />
         </Routes>
+        <ModalComponent show={modalOpen} onClose={() => setModalOpen(false)} />
       </div>
     </Router>
   );
