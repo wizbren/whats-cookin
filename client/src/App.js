@@ -8,7 +8,13 @@ import "./styles/main.scss";
 
 function App() {
   const user = "User 1"; //TEMPORARY HARDCORE FOR TESTING
-  const { apiMessage, modalOpen, setModalOpen } = useAppData();
+  const {
+    apiMessage,
+    modalOpen,
+    setModalOpen,
+    likedStatus, //pass down as a prop to users when we make the route
+    toggleLikedStatus, //pass down as a prop to users when we make the route
+  } = useAppData();
 
   return (
     <Router>
@@ -16,9 +22,23 @@ function App() {
         <Header user={user} /> {/* renders Header at the top */}
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Main apiMessage={apiMessage} />} />
+          <Route
+            path="/"
+            element={
+              <Main
+                apiMessage={apiMessage}
+                likedStatus={likedStatus}
+                toggleLikedStatus={toggleLikedStatus}
+              />
+            }
+          />
         </Routes>
-        <ModalComponent show={modalOpen} onClose={() => setModalOpen(false)} />
+        <ModalComponent
+          show={modalOpen}
+          onClose={() => setModalOpen(false)}
+          likedStatus={likedStatus}
+          toggleLikedStatus={toggleLikedStatus}
+        />
       </div>
     </Router>
   );
