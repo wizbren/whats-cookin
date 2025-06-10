@@ -58,15 +58,16 @@ const useAppData = () => {
   };
 
   //handles state of logged in user by user id
-  useEffect(() => {
-    // Replace when db for users connected
-    fetch("http://localhost:8080/api/users")
-      .then((response) => response.json())
-      .then((data) => {
-        setUserId(data.id);
-      })
-      .catch((error) => console.error("Error fetching user ID:", error));
-  }, []);
+  // i think we dont need this actually, keeping commented until im sure
+  // useEffect(() => {
+  //   // Replace when db for users connected
+  //   fetch("http://localhost:8080/api/users")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setUserId(data.id);
+  //     })
+  //     .catch((error) => console.error("Error fetching user ID:", error));
+  // }, []);
 
   return {
     apiMessage,

@@ -22,7 +22,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header user={user} /> {/* renders Header at the top */}
+        <Header user={userId} setUserId={setUserId} /> {/* renders Header at the top */}
         <Routes>
           <Route
             path="/login"

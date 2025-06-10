@@ -1,14 +1,25 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/components/_header.scss";
 
-export default function Header({ user }) {
+export default function Header(props) {
+  const { user, setUserId } = props;
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setUserId(null);
+    navigate("/login");
+  };
+
   return (
     <nav className="header">
       {/* LEFT BOX BELOW */}
       <div className="header-section header-left">
         <p className="user-name"> {user} </p>
         <div className="header-buttons">
-          <button className="header-btn">Logout</button>
+          <button className="header-btn" onClick={handleLogout}>
+            Logout
+          </button>
           <button className="header-btn">Favorites</button>
           <button className="header-btn">Clear Prompt</button>
         </div>
