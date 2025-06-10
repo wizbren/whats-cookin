@@ -1,11 +1,6 @@
-import Modal from "./Modal";
-
-const Main = (props) => {
-  const { showModal } = props;
+const Main = () => {
   return (
     <div className="main-view">
-      {showModal && <Modal />}
-      {/* main content here */}
       This is the main page
     </div>
   );
