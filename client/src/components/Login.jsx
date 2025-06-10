@@ -15,13 +15,13 @@ const Login = (props) => {
 
   return (
     <div className="login">
-      <button className="btn btn-success" onClick={() => handleLogin(1)}>
+      <button className="btn btn-success btn-lg" onClick={() => handleLogin(1)}>
         User 1
       </button>
-      <button className="btn btn-success" onClick={() => handleLogin(2)}>
+      <button className="btn btn-success btn-lg" onClick={() => handleLogin(2)}>
         User 2
       </button>
-      <button className="btn btn-success" onClick={() => handleLogin(3)}>
+      <button className="btn btn-success btn-lg" onClick={() => handleLogin(3)}>
         User 3
       </button>
     </div>
