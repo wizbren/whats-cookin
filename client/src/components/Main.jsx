@@ -8,6 +8,7 @@ const Main = (props) => {
     submitted,
     setSubmitted,
     recipesFromSearch,
+    setModalOpen,
   } = props; //use shared state + logic
 
   const handleChange = (event) => {
@@ -87,7 +88,7 @@ const Main = (props) => {
           Edit Your Search?
         </button>
       )}
-      <SearchResultList recipesFromSearch={recipesToRender} />
+      <SearchResultList recipesFromSearch={recipesToRender} setModalOpen={setModalOpen} />
     </div>
   );
 };
