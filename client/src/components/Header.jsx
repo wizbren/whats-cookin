@@ -12,6 +12,19 @@ export default function Header(props) {
     navigate("/login");
   };
 
+  //newly added
+  const handleFavorites = () => {
+    // Navigate to user page, passing userId as URL parameter
+    if (user) {
+      navigate(`/user/${user}`);
+    } else {
+      // Handle case where user is not logged in
+      alert("Please log in to view your favorites");
+    }
+  };
+
+
+
   return (
     <nav className="header">
       {/* LEFT BOX BELOW */}
