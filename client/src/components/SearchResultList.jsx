@@ -5,11 +5,8 @@ const SearchResultList = (props) => {
 
   return (
     <ul>
-      {recipesFromSearch.map((recipe) => (
-        <SearchResultListItem
-          key={recipe.id}
-          recipe={recipe}
-        />
+      {(recipesFromSearch || []).map((recipe) => (
+        <SearchResultListItem key={recipe.id} recipe={recipe} />
       ))}
     </ul>
   );

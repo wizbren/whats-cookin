@@ -1,7 +1,14 @@
 import SearchResultList from "./SearchResultList";
 
 const Main = (props) => {
-  const { prompt, setPrompt, fetchRecipes, submitted, setSubmitted } = props; //use shared state + logic
+  const {
+    prompt,
+    setPrompt,
+    fetchRecipes,
+    submitted,
+    setSubmitted,
+    recipesFromSearch,
+  } = props; //use shared state + logic
 
   const handleChange = (event) => {
     setPrompt(event.target.value); // update string in shared prompt state
@@ -49,7 +56,7 @@ const Main = (props) => {
           Edit Your Search?
         </button>
       )}
-      <SearchResultList />
+      <SearchResultList recipesFromSearch={recipesFromSearch} />
     </div>
   );
 };

@@ -26,6 +26,7 @@ function App() {
     setSubmitted,
     prompt,
     setPrompt,
+    recipesFromSearch,
   } = useAppData();
 
   return (
@@ -55,16 +56,13 @@ function App() {
                 fetchRecipes={fetchRecipes}
                 prompt={prompt}
                 setPrompt={setPrompt}
+                recipesFromSearch={recipesFromSearch}
               />
             }
           />
 
-
-          
           <Route path="/user/:userId" element={<User />} />
-
         </Routes>
-        
         <ModalComponent
           show={modalOpen}
           onClose={() => setModalOpen(false)}

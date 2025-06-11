@@ -6,7 +6,7 @@ const SearchResultListItem = (props) => {
   return (
     <div>
       <span>
-        <img src={recipe.image} alt={recipe.title} /> 
+        <img src={recipe.image} alt={recipe.title} />
         <div>
           <span>
             <h3>{recipe.title}</h3>
