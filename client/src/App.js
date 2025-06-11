@@ -17,12 +17,14 @@ function App() {
     toggleLikedStatus, //pass down as a prop to users when we make the route (and import recipeFavButton)
     userId,
     setUserId,
+    userInfo,
+    setUserInfo,
   } = useAppData();
 
   return (
     <Router>
       <div className="App">
-        <Header user={userId} setUserId={setUserId} /> {/* renders Header at the top */}
+        <Header user={userId} setUserId={setUserId} userInfo={userInfo} setUserInfo={setUserInfo} /> {/* renders Header at the top */}
         <Routes>
           <Route
             path="/login"

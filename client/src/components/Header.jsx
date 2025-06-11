@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import "../styles/components/_header.scss";
 
 export default function Header(props) {
-  const { user, setUserId } = props;
+  const { user, setUserId, userInfo, setUserInfo } = props;
   const navigate = useNavigate();
 
   const handleLogout = () => {
     setUserId(null);
+    setUserInfo(null);
     navigate("/login");
   };
 
@@ -15,9 +16,9 @@ export default function Header(props) {
     <nav className="header">
       {/* LEFT BOX BELOW */}
       <div className="header-section header-left">
-          <p className="user-name">
-            {user ? `Logged in as: User ${user}` : 'User Not Logged In' }
-          </p>
+        <p className="user-name">
+          {userInfo ? `Logged in as: ${userInfo.name}` : "User Not Logged In"}
+        </p>
         <div className="header-buttons">
           <button className="header-btn" onClick={handleLogout}>
             Logout
