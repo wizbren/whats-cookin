@@ -1,3 +1,5 @@
+import SearchResultList from "./SearchResultList";
+
 const Main = (props) => {
   const { prompt, setPrompt, fetchRecipes, submitted, setSubmitted } = props; //use shared state + logic
 
@@ -12,7 +14,10 @@ const Main = (props) => {
   };
 
   return (
-    <div className="main-view" style={{ backgroundImage: "url('/images/food.png')" }}>
+    <div
+      className="main-view"
+      style={{ backgroundImage: "url('/images/food.png')" }}
+    >
       {!submitted ? (
         <form className="prompt-form" onSubmit={handleSubmit}>
           <textarea
@@ -36,16 +41,16 @@ const Main = (props) => {
           </button>
         </form>
       ) : (
-      <button
-        className="btn btn-success"
-        style={{ fontSize: "2em", padding: "1em 2em" }}
-        onClick={() => setSubmitted(false)}
-      >
-        Edit Your Search?
-      </button>
+        <button
+          className="btn btn-success"
+          style={{ fontSize: "2em", padding: "1em 2em" }}
+          onClick={() => setSubmitted(false)}
+        >
+          Edit Your Search?
+        </button>
       )}
+      <SearchResultList />
     </div>
-  
   );
 };
 
