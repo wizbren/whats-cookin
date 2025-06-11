@@ -12,7 +12,7 @@ const Main = (props) => {
   };
 
   return (
-    <div className="main-view">
+    <div className="main-view" style={{ backgroundImage: "url('/images/food.png')" }}>
       {!submitted ? (
         <form className="prompt-form" onSubmit={handleSubmit}>
           <textarea
