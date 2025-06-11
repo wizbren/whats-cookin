@@ -4,6 +4,7 @@
   background-color: $background;
   min-height: calc(100vh - 80px); // adjust based on your actual header height
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 2rem;
@@ -12,6 +13,7 @@
 .prompt-form {
   background-color: $modal;
   padding: 0.25rem;
+  margin: 1em;
   border-radius: 8px;
   display: flex;
   flex-direction: row;
