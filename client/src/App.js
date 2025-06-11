@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import useAppData from "./hooks/useAppData";
 import "./styles/main.scss";
 
+import User from "./components/User";
 
 function App() {
   const user = "User 1"; //TEMPORARY HARDCORE FOR TESTING
@@ -40,7 +41,13 @@ function App() {
               />
             }
           />
+
+
+          
+          <Route path="/user/:userId" element={<User />} />
+
         </Routes>
+        
         <ModalComponent
           show={modalOpen}
           onClose={() => setModalOpen(false)}
