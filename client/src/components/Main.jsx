@@ -41,7 +41,7 @@ const Main = (props) => {
         style={{ fontSize: "2em", padding: "1em 2em" }}
         onClick={() => setSubmitted(false)}
       >
-        Search Again
+        Edit Your Search?
       </button>
       )}
     </div>
