@@ -9,6 +9,7 @@ const useAppData = () => {
   const [prompt, setPrompt] = useState(""); // moved from Main.jsx, process User text input
   const [userInfo, setUserInfo] = useState(null); //keeps track of currently logged in users info
   const [submitted, setSubmitted] = useState(false); //state for conditional rendering of form/button
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/test")
@@ -150,6 +151,8 @@ const useAppData = () => {
     setUserInfo,
     submitted,
     setSubmitted,
+    selectedRecipe,
+    setSelectedRecipe,
   };
 };
 

@@ -1,9 +1,10 @@
 import RecipeFavButton from "./RecipeFavButton";
 
 const SearchResultListItem = (props) => {
-  const { recipe, setModalOpen } = props;
+  const { recipe, setModalOpen, setSelectedRecipe } = props;
 
   const handleCardClick = () => {
+    setSelectedRecipe(recipe);
     setModalOpen(true);
   }
 

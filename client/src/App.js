@@ -27,6 +27,8 @@ function App() {
     prompt,
     setPrompt,
     recipesFromSearch,
+    selectedRecipe,
+    setSelectedRecipe,
   } = useAppData();
 
   return (
@@ -58,6 +60,7 @@ function App() {
                 setPrompt={setPrompt}
                 recipesFromSearch={recipesFromSearch}
                 setModalOpen={setModalOpen}
+                setSelectedRecipe={setSelectedRecipe}
               />
             }
           />
@@ -69,6 +72,7 @@ function App() {
           onClose={() => setModalOpen(false)}
           likedStatus={likedStatus}
           toggleLikedStatus={toggleLikedStatus}
+          selectedRecipe={selectedRecipe}
         />
       </div>
     </Router>

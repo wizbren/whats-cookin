@@ -9,6 +9,7 @@ const Main = (props) => {
     setSubmitted,
     recipesFromSearch,
     setModalOpen,
+    setSelectedRecipe,
   } = props; //use shared state + logic
 
   const handleChange = (event) => {
@@ -26,21 +27,24 @@ const Main = (props) => {
       id: 1,
       title: "Green Salad with Avocado",
       description: "A fresh and healthy avocado salad.",
-      image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       url: "https://www.edamam.com/results/recipe/?recipe=green-salad-with-avocado-2dbeaf3e96adcdcbcb3a4445ec9729d9/search=salad",
     },
     {
       id: 2,
       title: "Israeli Salad",
       description: "A crunchy, vibrant Israeli salad.",
-      image: "https://plus.unsplash.com/premium_photo-1676047258557-de72954cf17c?q=80&w=878&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://plus.unsplash.com/premium_photo-1676047258557-de72954cf17c?q=80&w=878&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       url: "https://www.edamam.com/results/recipe/?recipe=israeli-salad-recipe-8727c90d6f0b4d295c54f566805d2385/search=salad",
     },
     {
       id: 3,
       title: "Hot Mustard",
       description: "A fiery mustard to wake up your taste buds.",
-      image: "https://images.unsplash.com/photo-1551215536-a01ce2fb0d3d?q=80&w=873&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1551215536-a01ce2fb0d3d?q=80&w=873&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       url: "https://www.edamam.com/results/recipe/?recipe=hot-mustard-recipe-dfcafdc018404541a005c346df3d101b/search=",
     },
     // add more if you want
@@ -88,7 +92,11 @@ const Main = (props) => {
           Edit Your Search?
         </button>
       )}
-      <SearchResultList recipesFromSearch={recipesToRender} setModalOpen={setModalOpen} />
+      <SearchResultList
+        recipesFromSearch={recipesToRender}
+        setModalOpen={setModalOpen}
+        setSelectedRecipe={setSelectedRecipe}
+      />
     </div>
   );
 };
