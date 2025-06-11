@@ -8,7 +8,7 @@ const useAppData = () => {
   const [recipes, setRecipes] = useState([]); // store recipe results from Edamam in array
   const [prompt, setPrompt] = useState(""); // moved from Main.jsx, process User text input
   const [userInfo, setUserInfo] = useState(null); //keeps track of currently logged in users info
-
+  const [submitted, setSubmitted] = useState(false); //state for conditional rendering of form/button
 
   useEffect(() => {
     fetch("http://localhost:8080/api/test")
@@ -110,18 +110,17 @@ const useAppData = () => {
     }
   };
 
-useEffect(() => {
-  if (!userId) return;
+  useEffect(() => {
+    if (!userId) return;
 
-  fetch(`http://localhost:8080/api/users/${userId}`)
-    .then((res) => res.json())
-    .then((data) => {
-      setUserInfo(data.user);
-      setRecipes(data.recipes); // reuse your existing state
-    })
-    .catch((err) => console.error("Error fetching user data:", err));
-}, [userId]);
-
+    fetch(`http://localhost:8080/api/users/${userId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserInfo(data.user);
+        setRecipes(data.recipes); // reuse your existing state
+      })
+      .catch((err) => console.error("Error fetching user data:", err));
+  }, [userId]);
 
   //handles state of logged in user by user id
   // i think we dont need this actually, keeping commented until im sure
@@ -149,6 +148,8 @@ useEffect(() => {
     setPrompt, // for textarea change
     userInfo,
     setUserInfo,
+    submitted,
+    setSubmitted,
   };
 };
 

@@ -16,16 +16,28 @@ function App() {
     setModalOpen,
     likedStatus, //pass down as a prop to users when we make the route (and import recipeFavButton)
     toggleLikedStatus, //pass down as a prop to users when we make the route (and import recipeFavButton)
+    recipes,
+    fetchRecipes,
     userId,
     setUserId,
     userInfo,
     setUserInfo,
+    submitted,
+    setSubmitted,
+    prompt,
+    setPrompt,
   } = useAppData();
 
   return (
     <Router>
       <div className="App">
-        <Header user={userId} setUserId={setUserId} userInfo={userInfo} setUserInfo={setUserInfo} /> {/* renders Header at the top */}
+        <Header
+          user={userId}
+          setUserId={setUserId}
+          userInfo={userInfo}
+          setUserInfo={setUserInfo}
+        />{" "}
+        {/* renders Header at the top */}
         <Routes>
           <Route
             path="/login"
@@ -38,6 +50,11 @@ function App() {
                 apiMessage={apiMessage}
                 likedStatus={likedStatus}
                 toggleLikedStatus={toggleLikedStatus}
+                submitted={submitted}
+                setSubmitted={setSubmitted}
+                fetchRecipes={fetchRecipes}
+                prompt={prompt}
+                setPrompt={setPrompt}
               />
             }
           />
