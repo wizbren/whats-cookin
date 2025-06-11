@@ -1,8 +1,14 @@
 import RecipeFavButton from "./RecipeFavButton";
 
-const SearchResultListItem = ({ recipe }) => {
+const SearchResultListItem = (props) => {
+  const { recipe, setModalOpen } = props;
+
+  const handleCardClick = () => {
+    setModalOpen(true);
+  }
+
   return (
-    <div className="card mb-3" style={{ maxWidth: "540px" }}>
+    <div className="card mb-3" style={{ maxWidth: "540px", cursor: "pointer" }} onClick={handleCardClick}>
       <div className="row g-0">
         <div className="col-md-4">
           <img

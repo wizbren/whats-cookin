@@ -57,6 +57,7 @@ function App() {
                 prompt={prompt}
                 setPrompt={setPrompt}
                 recipesFromSearch={recipesFromSearch}
+                setModalOpen={setModalOpen}
               />
             }
           />
