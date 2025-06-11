@@ -25,13 +25,7 @@ const User = () => {
       });
   }, [userId, navigate]);
 
-  const deleteRecipe = (id) => {
-    axios.delete(`http://localhost:8080/api/recipes/${id}`)
-      .then(() => {
-        setRecipes(prev => prev.filter(recipe => recipe.id !== id));
-      })
-      .catch(err => console.error('Error deleting recipe:', err));
-  };
+
 
   const goBack = () => {
     navigate(-1); // Go back to previous page
@@ -45,7 +39,7 @@ const User = () => {
     <div style={{ padding: '20px' }}>
       <div style={{ marginBottom: '20px' }}>
         <button onClick={goBack} style={{ marginRight: '10px' }}>
-          ← Back
+          Return to Main Page
         </button>
         <h2>Your Favorite Recipes</h2>
       </div>
@@ -61,9 +55,21 @@ const User = () => {
               border: '1px solid #ddd', 
               borderRadius: '8px',
               display: 'flex',
-              justifyContent: 'space-between',
               alignItems: 'center'
             }}>
+              {recipe.image && (
+                <img 
+                  src={recipe.image} 
+                  alt="Recipe" 
+                  style={{ 
+                    width: '80px', 
+                    height: '80px', 
+                    borderRadius: '8px', 
+                    marginRight: '15px',
+                    objectFit: 'cover'
+                  }} 
+                />
+              )}
               <a 
                 href={recipe.url} 
                 target="_blank" 
@@ -75,21 +81,8 @@ const User = () => {
                   flex: 1
                 }}
               >
-                {recipe.title || recipe.url}
+                {recipe.title || 'View Recipe'}
               </a>
-              <button 
-                onClick={() => deleteRecipe(recipe.id)}
-                style={{
-                  backgroundColor: '#dc3545',
-                  color: 'white',
-                  border: 'none',
-                  padding: '8px 12px',
-                  borderRadius: '4px',
-                  cursor: 'pointer'
-                }}
-              >
-                Remove
-              </button>
             </li>
           ))}
         </ul>
