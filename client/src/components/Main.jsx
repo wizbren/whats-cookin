@@ -20,6 +20,37 @@ const Main = (props) => {
     setSubmitted(true);
   };
 
+  const dummyRecipes = [
+    {
+      id: 1,
+      title: "Green Salad with Avocado",
+      description: "A fresh and healthy avocado salad.",
+      image: "https://shorturl.at/r3d3r",
+      url: "https://www.edamam.com/results/recipe/?recipe=green-salad-with-avocado-2dbeaf3e96adcdcbcb3a4445ec9729d9/search=salad",
+    },
+    {
+      id: 2,
+      title: "Israeli Salad",
+      description: "A crunchy, vibrant Israeli salad.",
+      image: "https://shorturl.at/QrIlT",
+      url: "https://www.edamam.com/results/recipe/?recipe=israeli-salad-recipe-8727c90d6f0b4d295c54f566805d2385/search=salad",
+    },
+    {
+      id: 3,
+      title: "Hot Mustard",
+      description: "A fiery mustard to wake up your taste buds.",
+      image: "https://shorturl.at/rtngE",
+      url: "https://www.edamam.com/results/recipe/?recipe=hot-mustard-recipe-dfcafdc018404541a005c346df3d101b/search=",
+    },
+    // add more if you want
+  ];
+
+  //logic for rendering dummy data if no real data exists
+  const recipesToRender =
+    recipesFromSearch && recipesFromSearch.length
+      ? recipesFromSearch
+      : dummyRecipes;
+
   return (
     <div
       className="main-view"
@@ -56,7 +87,7 @@ const Main = (props) => {
           Edit Your Search?
         </button>
       )}
-      <SearchResultList recipesFromSearch={recipesFromSearch} />
+      <SearchResultList recipesFromSearch={recipesToRender} />
     </div>
   );
 };
