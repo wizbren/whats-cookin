@@ -39,6 +39,7 @@ function App() {
           setUserId={setUserId}
           userInfo={userInfo}
           setUserInfo={setUserInfo}
+          setPrompt={setPrompt}
         />{" "}
         {/* renders Header at the top */}
         <Routes>

@@ -87,7 +87,7 @@ const Main = (props) => {
         </form>
       ) : (
         <button
-          className="btn btn-success"
+          className="btn btn-success edit-search-btn"
           style={{ fontSize: "2em", padding: "1em 2em" }}
           onClick={() => setSubmitted(false)}
         >

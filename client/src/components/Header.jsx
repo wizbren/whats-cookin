@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import "../styles/components/_header.scss";
 
 export default function Header(props) {
-  const { user, setUserId, userInfo, setUserInfo } = props;
+  const { user, setUserId, userInfo, setUserInfo, setPrompt } = props;
   const navigate = useNavigate();
 
   const handleLogout = () => {
     setUserId(null);
     setUserInfo(null);
+    localStorage.removeItem("userId");
     navigate("/login");
   };
 
@@ -23,8 +24,6 @@ export default function Header(props) {
     }
   };
 
-
-
   return (
     <nav className="header">
       {/* LEFT BOX BELOW */}
@@ -37,7 +36,9 @@ export default function Header(props) {
             Logout
           </button>
           <button className="header-btn">Favorites</button>
-          <button className="header-btn">Clear Prompt</button>
+          <button className="header-btn" onClick={() => setPrompt("")}>
+            Clear Prompt
+          </button>
         </div>
       </div>
 

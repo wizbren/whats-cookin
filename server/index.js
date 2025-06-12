@@ -12,17 +12,6 @@ app.get("/api/test", (req, res) => {
   res.json({ message: "Hello from Express!" });
 });
 
-//this is temp test code, to be deleted
-app.get("/api/whoami", async (req, res) => {
-  try {
-    const result = await pool.query("SELECT current_user, current_database();");
-    res.json(result.rows[0]);
-  } catch (err) {
-    console.error("Error checking identity:", err);
-    res.status(500).json({ error: "Failed to check user" });
-  }
-});
-
 app.get("/api/users/:id", async (req, res) => {
   const userId = req.params.id;
   try {
@@ -61,7 +50,11 @@ app.post("/api/recipes", async (req, res) => {
       RETURNING *`,
       [user_id, url, image]
     );
-    res.status(201).json(result.rows[0]);
+    if (result.rows.length > 0) {
+      res.status(201).json(result.rows[0]); // new row inserted
+    } else {
+      res.status(200).json({ message: "Recipe already exists" }); // duplicate, ignored
+    }
   } catch (err) {
     console.error("❌ Error adding recipe:", err);
     res.status(500).json({ error: "Failed to save recipe" });
