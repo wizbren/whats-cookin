@@ -1,7 +1,7 @@
 import SearchResultListItem from "./SearchResultListItem";
 
 const SearchResultList = (props) => {
-  const { recipesFromSearch, setModalOpen, setSelectedRecipe } = props;
+  const { recipesFromSearch, setModalOpen, setSelectedRecipe, toggleLikedStatus, likedStatus } = props;
 
   return (
     <ul>
@@ -11,6 +11,8 @@ const SearchResultList = (props) => {
           recipe={recipe}
           setModalOpen={setModalOpen}
           setSelectedRecipe={setSelectedRecipe}
+          toggleLikedStatus={toggleLikedStatus}
+          likedStatus={likedStatus}
         />
       ))}
     </ul>

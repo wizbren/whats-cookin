@@ -10,6 +10,8 @@ const Main = (props) => {
     recipesFromSearch,
     setModalOpen,
     setSelectedRecipe,
+    toggleLikedStatus,
+    likedStatus,
   } = props; //use shared state + logic
 
   const handleChange = (event) => {
@@ -96,6 +98,8 @@ const Main = (props) => {
         recipesFromSearch={recipesToRender}
         setModalOpen={setModalOpen}
         setSelectedRecipe={setSelectedRecipe}
+        toggleLikedStatus={toggleLikedStatus}
+        likedStatus={likedStatus}
       />
     </div>
   );

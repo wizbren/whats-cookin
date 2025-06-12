@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const pool = require("./src/db");
 
-
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -49,10 +48,16 @@ app.get("/api/users/:id", async (req, res) => {
 
 app.post("/api/recipes", async (req, res) => {
   const { user_id, url, image } = req.body;
+
+  if (!user_id || !url || !image) {
+    return res.status(400).json({ error: "Missing user_id, url, or image" });
+  }
+
   try {
     const result = await pool.query(
       `INSERT INTO recipes (user_id, url, image)
       VALUES ($1, $2, $3)
+      ON CONFLICT (user_id, url) DO NOTHING
       RETURNING *`,
       [user_id, url, image]
     );
@@ -88,7 +93,6 @@ app.delete("/api/recipes/:id", async (req, res) => {
   }
 });
 
-
 // route to get only liked recipes of a user
 app.get("/api/users/:id/liked-recipes", async (req, res) => {
   const userId = req.params.id;
@@ -103,8 +107,6 @@ app.get("/api/users/:id/liked-recipes", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch liked recipes" });
   }
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
