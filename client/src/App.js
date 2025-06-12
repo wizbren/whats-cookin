@@ -25,7 +25,10 @@ function App() {
     submitted,
     setSubmitted,
     prompt,
-    setPrompt
+    setPrompt,
+    recipesFromSearch,
+    selectedRecipe,
+    setSelectedRecipe,
   } = useAppData();
 
   return (
@@ -36,6 +39,7 @@ function App() {
           setUserId={setUserId}
           userInfo={userInfo}
           setUserInfo={setUserInfo}
+          setPrompt={setPrompt}
         />{" "}
         {/* renders Header at the top */}
         <Routes>
@@ -55,7 +59,10 @@ function App() {
                 fetchRecipes={fetchRecipes}
                 prompt={prompt}
                 setPrompt={setPrompt}
-                recipesFromSearch={recipes}
+                recipesFromSearch={recipesFromSearch}
+                setModalOpen={setModalOpen}
+                setSelectedRecipe={setSelectedRecipe}
+                recipes={recipes}
               />
             }
           />
@@ -70,6 +77,7 @@ function App() {
           onClose={() => setModalOpen(false)}
           likedStatus={likedStatus}
           toggleLikedStatus={toggleLikedStatus}
+          selectedRecipe={selectedRecipe}
         />
       </div>
     </Router>

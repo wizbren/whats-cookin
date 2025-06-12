@@ -1,13 +1,13 @@
 import FavIcon from './FavIcon';
 
-import './styles/FavBadge.scss';
+import '../styles/FavBadge.scss';
 
 const FavBadge = (props) => {
-  const { isFavRecipeExist, selected, onClick } = props;
+  const { selected, onClick } = props;
 
   return (
     <div className='fav-badge' onClick={onClick} >
-      <FavIcon displayAlert={!!isFavRecipeExist} selected={selected} />
+      <FavIcon displayAlert={selected} selected={selected} />
     </div>
   )
 };
