@@ -40,6 +40,7 @@ const SearchResultListItem = (props) => {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-success btn-sm"
+              onClick={(e) => e.stopPropagation()}
             >
               View Recipe
             </a>
