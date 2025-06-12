@@ -3,12 +3,15 @@ import { useNavigate } from "react-router-dom";
 import "../styles/components/_header.scss";
 
 export default function Header(props) {
-  const { user, setUserId, userInfo, setUserInfo, setPrompt } = props;
+  const { user, setUserId, userInfo, setUserInfo, setPrompt, setRecipes, setSubmitted } = props;
   const navigate = useNavigate();
 
   const handleLogout = () => {
     setUserId(null);
     setUserInfo(null);
+    setRecipes([]);
+    setPrompt("");
+    setSubmitted(false);
     localStorage.removeItem("userId");
     navigate("/login");
   };

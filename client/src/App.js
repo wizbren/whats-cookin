@@ -17,6 +17,7 @@ function App() {
     likedStatus, //pass down as a prop to users when we make the route (and import recipeFavButton)
     toggleLikedStatus, //pass down as a prop to users when we make the route (and import recipeFavButton)
     recipes,
+    setRecipes,
     fetchRecipes,
     userId,
     setUserId,
@@ -40,6 +41,8 @@ function App() {
           userInfo={userInfo}
           setUserInfo={setUserInfo}
           setPrompt={setPrompt}
+          setRecipes={setRecipes}
+          setSubmitted={setSubmitted}
         />{" "}
         {/* renders Header at the top */}
         <Routes>

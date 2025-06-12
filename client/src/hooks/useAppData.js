@@ -199,6 +199,7 @@ const useAppData = () => {
     userId,
     setUserId,
     recipes, // allows Main to access it
+    setRecipes,
     fetchRecipes, // function expoesed to run logic in Main
     prompt, // for controlled form
     setPrompt, // for textarea change
