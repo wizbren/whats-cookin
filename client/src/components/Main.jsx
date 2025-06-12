@@ -12,7 +12,7 @@ const Main = (props) => {
     setSelectedRecipe,
     toggleLikedStatus,
     likedStatus,
-    //might need RECIPES as a prop
+    recipes,
   } = props; //use shared state + logic
 
   const handleChange = (event) => {
@@ -60,7 +60,7 @@ const Main = (props) => {
   : dummyRecipes;
   */
 
-  const recipesToRender = recipesFromSearch || [];   //VERIFY
+  const recipesToRender = recipes || [];   //VERIFY
   console.log("recipesToRender in Main.jsx:", recipesToRender); //debug log to check what recipes render
 
   return (

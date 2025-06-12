@@ -62,6 +62,7 @@ function App() {
                 recipesFromSearch={recipesFromSearch}
                 setModalOpen={setModalOpen}
                 setSelectedRecipe={setSelectedRecipe}
+                recipes={recipes}
               />
             }
           />
