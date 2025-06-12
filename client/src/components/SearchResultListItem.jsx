@@ -11,7 +11,11 @@ const SearchResultListItem = (props) => {
   return (
     <div
       className="card mb-3"
-      style={{ maxWidth: "540px", cursor: "pointer" }}
+      style={{ 
+        maxWidth: "540px", 
+        cursor: "pointer",
+        border: "5px solid #148e01",
+       }}
       onClick={handleCardClick}
     >
       <div className="row g-0">
