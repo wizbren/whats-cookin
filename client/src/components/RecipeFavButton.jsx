@@ -1,14 +1,19 @@
-import FavIcon from "./FavIcon";
 import "../styles/RecipeFavButton.scss";
+import FavBadge from "./FavBadge";
 
 //this component is responsible for favourite button, it handles the click and the actual change in appearance when the botton is clicked
 const RecipeFavButton = (props) => {
-  const { toggleFavourite, favouriteStatus } = props;
+  const { liked, toggleLikedStatus } = props;
+
+  const handleClick = (e) => {
+    e.stopPropagation(); //makes it so doesn't trigger the modal
+    toggleLikedStatus()
+  };
 
   return (
-    <div className="recipe-list__fav-icon" onClick={toggleFavourite}>
+    <div className="recipe-list__fav-icon">
       <div className="recipe-list__fav-icon-svg">
-        <FavIcon selected={favouriteStatus === "favourited"} />
+        <FavBadge selected={liked} onClick={handleClick} />
       </div>
     </div>
   );

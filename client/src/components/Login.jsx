@@ -9,6 +9,7 @@ const Login = (props) => {
     console.log(`Logging in user with ID: ${userId}`);
     if ([1, 2, 3].includes(userId)) { //super basic check to validate api request to DB
       setUserId(userId);
+      localStorage.setItem("userId", userId);
       navigate('/')
     }
   };

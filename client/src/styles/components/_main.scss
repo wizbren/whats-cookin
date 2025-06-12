@@ -1,4 +1,4 @@
-@import '../_variables';
+@import "../_variables";
 
 .main-view {
   background-color: $background;
@@ -41,4 +41,8 @@
   color: $background;
   padding: 0.5rem;
   cursor: pointer;
+}
+
+.edit-search-btn {
+  margin: 1em;
 }

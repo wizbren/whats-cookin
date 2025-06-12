@@ -5,7 +5,6 @@ const express = require("express");
 const cors = require("cors");
 const pool = require("./src/db");
 
-
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -17,17 +16,6 @@ app.use("/api/recipes", recipesRoutes);  //VERIFY: should route searches through
 
 app.get("/api/test", (req, res) => {
   res.json({ message: "Hello from Express!" });
-});
-
-//this is temp test code, to be deleted
-app.get("/api/whoami", async (req, res) => {
-  try {
-    const result = await pool.query("SELECT current_user, current_database();");
-    res.json(result.rows[0]);
-  } catch (err) {
-    console.error("Error checking identity:", err);
-    res.status(500).json({ error: "Failed to check user" });
-  }
 });
 
 app.get("/api/users/:id", async (req, res) => {
@@ -55,14 +43,24 @@ app.get("/api/users/:id", async (req, res) => {
 
 app.post("/api/recipes", async (req, res) => {
   const { user_id, url, image } = req.body;
+
+  if (!user_id || !url || !image) {
+    return res.status(400).json({ error: "Missing user_id, url, or image" });
+  }
+
   try {
     const result = await pool.query(
       `INSERT INTO recipes (user_id, url, image)
       VALUES ($1, $2, $3)
+      ON CONFLICT (user_id, url) DO NOTHING
       RETURNING *`,
       [user_id, url, image]
     );
-    res.status(201).json(result.rows[0]);
+    if (result.rows.length > 0) {
+      res.status(201).json(result.rows[0]); // new row inserted
+    } else {
+      res.status(200).json({ message: "Recipe already exists" }); // duplicate, ignored
+    }
   } catch (err) {
     console.error("❌ Error adding recipe:", err);
     res.status(500).json({ error: "Failed to save recipe" });
@@ -94,7 +92,6 @@ app.delete("/api/recipes/:id", async (req, res) => {
   }
 });
 
-
 // route to get only liked recipes of a user
 app.get("/api/users/:id/liked-recipes", async (req, res) => {
   const userId = req.params.id;
@@ -109,8 +106,6 @@ app.get("/api/users/:id/liked-recipes", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch liked recipes" });
   }
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);

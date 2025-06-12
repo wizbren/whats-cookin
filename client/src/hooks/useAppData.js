@@ -9,6 +9,7 @@ const useAppData = () => {
   const [prompt, setPrompt] = useState(""); // moved from Main.jsx, process User text input
   const [userInfo, setUserInfo] = useState(null); //keeps track of currently logged in users info
   const [submitted, setSubmitted] = useState(false); //state for conditional rendering of form/button
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/test")
@@ -17,16 +18,21 @@ const useAppData = () => {
       .catch((err) => console.error("Error fetching API:", err));
   }, []);
 
+  useEffect(() => {
+  const storedUserId = localStorage.getItem("userId");
+  if (storedUserId) {
+    setUserId(Number(storedUserId));
+  }
+}, []);
+
+
   //handles state of liked recipes and should therefore update the DB/API too
   // when called later call like this toggleLikedStatus(recipe.id, recipe.url, recipe.image)
   const toggleLikedStatus = (recipeId, url, image) => {
+    console.log("Toggle called with:", { recipeId, url, image, userId }); //debugging
+
     const currentStatus = likedStatus[recipeId] || "notLiked";
     const updatedStatus = currentStatus === "liked" ? "notLiked" : "liked";
-
-    setLikedStatus((prev) => ({
-      ...prev,
-      [recipeId]: updatedStatus,
-    }));
 
     if (updatedStatus === "liked") {
       //if status is liked, it gets added
@@ -41,8 +47,16 @@ const useAppData = () => {
           image,
         }),
       })
-        .then((res) => res.json())
-        .then((data) => console.log("Liked recipe saved:", data))
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to save recipe");
+          return res.json();
+        })
+        .then(() => {
+          setLikedStatus((prev) => ({
+            ...prev,
+            [recipeId]: "liked",
+          }));
+        })
         .catch((err) => console.error("Error saving recipe:", err));
     } else {
       fetch(`http://localhost:8080/api/recipes/${recipeId}`, {
@@ -51,12 +65,15 @@ const useAppData = () => {
         body: JSON.stringify({ user_id: userId }),
       })
         .then((res) => {
-          if (!res.ok) {
-            throw new Error("Failed to delete recipe");
-          }
+          if (!res.ok) throw new Error("Failed to delete recipe");
           return res.json();
         })
-        .then((data) => console.log("Recipe deleted:", data))
+        .then(() => {
+          setLikedStatus((prev) => ({
+            ...prev,
+            [recipeId]: "notLiked",
+          }));
+        })
         .catch((err) => console.error("Error deleting recipe:", err));
     }
   };
@@ -134,15 +151,27 @@ const useAppData = () => {
   };
 
   useEffect(() => {
-    if (!userId) return;
+    if (!userId) {
+      setLikedStatus({});
+      return;
+    }
 
     fetch(`http://localhost:8080/api/users/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         setUserInfo(data.user);
-        if (!submitted) {
-          setRecipes(data.recipes); // reuse your existing state
-        }
+        //------------------------------------------------------------
+        //         if (!submitted) {
+        //   setRecipes(data.recipes); // reuse your existing state
+        // }
+        //------------------------------------------------------------
+        setRecipes(data.recipes); // reuse your existing state
+        // set likedStatus from DB
+        const statusMap = {};
+        data.recipes.forEach((recipe) => {
+          statusMap[recipe.id] = recipe.liked ? "liked" : "notLiked";
+        });
+        setLikedStatus(statusMap);
       })
       .catch((err) => console.error("Error fetching user data:", err));
   }, [userId]);
@@ -175,6 +204,8 @@ const useAppData = () => {
     setUserInfo,
     submitted,
     setSubmitted,
+    selectedRecipe,
+    setSelectedRecipe,
   };
 };
 
