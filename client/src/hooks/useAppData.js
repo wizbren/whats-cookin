@@ -138,7 +138,7 @@ const useAppData = () => {
       console.log("Edamam recipes: ", edamamData.hits);
 
       const cleanedRecipes = edamamData.hits.slice(0, 3).map((hit, index) => ({    // VERIFY: this controls how many recipes are displayed
-        id: index + 1,
+        id: hit.recipe.url, //cant use an integer as it interacts with other users
         title: hit.recipe.label,
         description: hit.recipe.ingredientLines.slice(0, 3).join(", "), // VERIFY: this controls how many ingredients are displayed
         image: hit.recipe.image,
