@@ -13,6 +13,8 @@ const Main = (props) => {
     toggleLikedStatus,
     likedStatus,
     recipes,
+    recipesFromDB,
+    setRecipesFromDB,
   } = props; //use shared state + logic
 
   const handleChange = (event) => {

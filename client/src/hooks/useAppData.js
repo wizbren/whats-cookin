@@ -10,6 +10,8 @@ const useAppData = () => {
   const [userInfo, setUserInfo] = useState(null); //keeps track of currently logged in users info
   const [submitted, setSubmitted] = useState(false); //state for conditional rendering of form/button
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [recipesFromDB, setRecipesFromDB] = useState([]); // user's saved/liked recipes
+
 
   useEffect(() => {
     fetch("http://localhost:8080/api/test")
@@ -165,7 +167,7 @@ const useAppData = () => {
         //   setRecipes(data.recipes); // reuse your existing state
         // }
         //------------------------------------------------------------
-        setRecipes(data.recipes); // reuse your existing state
+        setRecipesFromDB(data.recipes); // reuse your existing state
         // set likedStatus from DB
         const statusMap = {};
         data.recipes.forEach((recipe) => {
@@ -206,6 +208,8 @@ const useAppData = () => {
     setSubmitted,
     selectedRecipe,
     setSelectedRecipe,
+    recipesFromDB,
+    setRecipesFromDB,
   };
 };
 
