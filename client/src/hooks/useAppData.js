@@ -81,7 +81,7 @@ const useAppData = () => {
               }, // String currated by ChatGPT
               {
                 role: "user",
-                content: `Turn this prompt into ingredients or a search query for Edamam: ${prompt}`,
+                content: `${prompt}. Reply with only the main ingredient or food.`,
               }, // uses state ; String currated by ChatGPT
             ],
           }),
@@ -89,22 +89,45 @@ const useAppData = () => {
       );
 
       const openAIData = await openAIResponse.json();
-      const queryString = openAIData.choices?.[0]?.message?.content || "";
+//    const queryString = openAIData.choices?.[0]?.message?.content || "";
+
+      let queryString = openAIData.choices?.[0]?.message?.content || "";
+      queryString = queryString.replace(/^Search query:\s*/i, "").trim();
+      console.log("🧠 Raw OpenAI query:", queryString);
+
+      // VERIFY: Trirs to pull out just the first quoted word if it's in quotes
+      const quotedMatch = queryString.match(/"(.*?)"/);
+      if (quotedMatch) {
+        queryString = quotedMatch[1];
+      }
+      console.log("🔍 Final query to send to Edamam:", queryString);
 
       console.log("OpenAI query:", queryString);
 
-      //use OpenAI to fetch from Edamam  +  LINE 41 needs to be looked at and changed(need App ID and Key)
+      //use OpenAI to fetch from Edamam 
       const edamamResponse = await fetch(
-        `https://api.edamam.com/search?q=${encodeURIComponent(
-          queryString
-        )}&app_id=${process.env.REACT_APP_EDAMAM_APP_ID}&app_key=${
-          process.env.REACT_APP_EDAMAM_APP_KEY
-        }`
+        "http://localhost:8080/api/recipes/search",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ query: queryString }),
+        }
       );
       const edamamData = await edamamResponse.json();
-
       console.log("Edamam recipes: ", edamamData.hits);
-      setRecipes(edamamData.hits); // store recipe results
+
+      const cleanedRecipes = edamamData.hits.slice(0, 3).map((hit, index) => ({    // VERIFY: this controls how many recipes are displayed
+        id: index + 1,
+        title: hit.recipe.label,
+        description: hit.recipe.ingredientLines.slice(0, 3).join(", "), // VERIFY: this controls how many ingredients are displayed
+        image: hit.recipe.image,
+        url: hit.recipe.url,
+      }));
+
+      setRecipes(cleanedRecipes); // VERIFY: changed from edamamData.hits to cleanedRecipes to use transformed array
+      console.log("Cleaned recipes set in state:", cleanedRecipes);
     } catch (err) {
       console.error("Error in fetchRecipes:", err);
     }
@@ -117,7 +140,9 @@ const useAppData = () => {
       .then((res) => res.json())
       .then((data) => {
         setUserInfo(data.user);
-        setRecipes(data.recipes); // reuse your existing state
+        if (!submitted) {
+          setRecipes(data.recipes); // reuse your existing state
+        }
       })
       .catch((err) => console.error("Error fetching user data:", err));
   }, [userId]);
