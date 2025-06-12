@@ -99,16 +99,17 @@ app.delete("/api/recipes/:id", async (req, res) => {
 app.get("/api/users/:id/liked-recipes", async (req, res) => {
   const userId = req.params.id;
   try {
-    const result = await pool.query(
-      `SELECT * FROM recipes WHERE user_id = $1 AND liked = true`,
+    const result = await db.query(
+      "SELECT * FROM Recipes WHERE user_id = $1 AND liked = true",
       [userId]
     );
     res.json(result.rows);
   } catch (err) {
-    console.error("❌ Error fetching liked recipes:", err);
+    console.error("❌ Error in /api/users/:id/liked-recipes:", err);
     res.status(500).json({ error: "Failed to fetch liked recipes" });
   }
 });
+
 
 
 

@@ -60,7 +60,10 @@ function App() {
             }
           />
 
-          <Route path="/user/:userId" element={<User />} />
+          <Route path="/user/:id" element={<User />} />
+
+
+
         </Routes>
         <ModalComponent
           show={modalOpen}
