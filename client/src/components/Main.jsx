@@ -14,12 +14,13 @@ const Main = (props) => {
     setPrompt(event.target.value); // update string in shared prompt state
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // prevents page reload
-    fetchRecipes(); //run recipe search (triggers OpenAI => Edamam logic)
+  const handleSubmit = async (event) => {       // VERIFY: added async/await so that fetchRecipes finishes before setSubmitted is flagged as true
+    event.preventDefault();     // prevents page reload
+    await fetchRecipes();          //run recipe search (triggers OpenAI => Edamam logic)
     setSubmitted(true);
   };
 
+/*
   const dummyRecipes = [
     {
       id: 1,
@@ -42,14 +43,17 @@ const Main = (props) => {
       image: "https://images.unsplash.com/photo-1551215536-a01ce2fb0d3d?q=80&w=873&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       url: "https://www.edamam.com/results/recipe/?recipe=hot-mustard-recipe-dfcafdc018404541a005c346df3d101b/search=",
     },
-    // add more if you want
   ];
-
+  
   //logic for rendering dummy data if no real data exists
   const recipesToRender =
-    recipesFromSearch && recipesFromSearch.length
-      ? recipesFromSearch
-      : dummyRecipes;
+  recipesFromSearch && recipesFromSearch.length
+  ? recipesFromSearch
+  : dummyRecipes;
+  */
+
+  const recipesToRender = recipesFromSearch || [];   //VERIFY
+  console.log("recipesToRender in Main.jsx:", recipesToRender); //debug log to check what recipes render
 
   return (
     <div

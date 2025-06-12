@@ -9,7 +9,7 @@ import "./styles/main.scss";
 import User from "./components/User";
 
 function App() {
-  const user = "User 1"; //TEMPORARY HARDCORE FOR TESTING
+  const user = "User 1"; //TEMPORARY HARDCODE FOR TESTING
   const {
     apiMessage,
     modalOpen,
@@ -25,8 +25,7 @@ function App() {
     submitted,
     setSubmitted,
     prompt,
-    setPrompt,
-    recipesFromSearch,
+    setPrompt
   } = useAppData();
 
   return (
@@ -56,7 +55,7 @@ function App() {
                 fetchRecipes={fetchRecipes}
                 prompt={prompt}
                 setPrompt={setPrompt}
-                recipesFromSearch={recipesFromSearch}
+                recipesFromSearch={recipes}
               />
             }
           />

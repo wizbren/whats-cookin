@@ -1,3 +1,6 @@
+require("dotenv").config();
+console.log("🔍 Edamam ID:", process.env.EDAMAM_APP_ID);
+console.log("🔍 Edamam KEY:", process.env.EDAMAM_APP_KEY);
 const express = require("express");
 const cors = require("cors");
 const pool = require("./src/db");
@@ -8,6 +11,9 @@ const PORT = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
+
+const recipesRoutes = require("./src/routes/recipes"); //Mounts custom Edamam route
+app.use("/api/recipes", recipesRoutes);  //VERIFY: should route searches through recipes.js
 
 app.get("/api/test", (req, res) => {
   res.json({ message: "Hello from Express!" });
