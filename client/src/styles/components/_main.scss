@@ -6,8 +6,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 180px;
+  padding-top: 220px;
   padding-bottom: 60px;
+  min-height: 100vh;
 }
 
 .prompt-form {
@@ -44,5 +45,6 @@
 }
 
 .edit-search-btn {
-  margin: 1em;
+  margin-top: 2rem;
+  margin-bottom: 1em;
 }
