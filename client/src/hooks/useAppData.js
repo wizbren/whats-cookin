@@ -137,7 +137,7 @@ const useAppData = () => {
       const edamamData = await edamamResponse.json();
       console.log("Edamam recipes: ", edamamData.hits);
 
-      const cleanedRecipes = edamamData.hits.slice(0, 3).map((hit, index) => ({    // VERIFY: this controls how many recipes are displayed
+      const cleanedRecipes = edamamData.hits.slice(0, 5).map((hit, index) => ({    // VERIFY: this controls how many recipes are displayed
         id: index + 1,
         title: hit.recipe.label,
         description: hit.recipe.ingredientLines.slice(0, 3).join(", "), // VERIFY: this controls how many ingredients are displayed
