@@ -21,13 +21,14 @@ const Main = (props) => {
     setPrompt(event.target.value); // update string in shared prompt state
   };
 
-  const handleSubmit = async (event) => {       // VERIFY: added async/await so that fetchRecipes finishes before setSubmitted is flagged as true
-    event.preventDefault();     // prevents page reload
-    await fetchRecipes();          //run recipe search (triggers OpenAI => Edamam logic)
+  const handleSubmit = async (event) => {
+    // VERIFY: added async/await so that fetchRecipes finishes before setSubmitted is flagged as true
+    event.preventDefault(); // prevents page reload
+    await fetchRecipes(); //run recipe search (triggers OpenAI => Edamam logic)
     setSubmitted(true);
   };
 
-/*
+  /*
   const dummyRecipes = [
     {
       id: 1,
@@ -62,7 +63,7 @@ const Main = (props) => {
   : dummyRecipes;
   */
 
-  const recipesToRender = recipes || [];   //VERIFY
+  const recipesToRender = recipes || []; //VERIFY
   console.log("recipesToRender in Main.jsx:", recipesToRender); //debug log to check what recipes render
 
   return (
@@ -93,13 +94,15 @@ const Main = (props) => {
           </button>
         </form>
       ) : (
-        <button
-          className="btn btn-success edit-search-btn"
-          style={{ fontSize: "2em", padding: "1em 2em" }}
-          onClick={() => setSubmitted(false)}
-        >
-          Edit Your Search?
-        </button>
+        <div className="edit-search-wrapper">
+          <button
+            className="btn btn-success edit-search-btn"
+            style={{ fontSize: "2em", padding: "1em 2em" }}
+            onClick={() => setSubmitted(false)}
+          >
+            Edit Your Search?
+          </button>
+        </div>
       )}
       <SearchResultList
         recipesFromSearch={recipesToRender}
