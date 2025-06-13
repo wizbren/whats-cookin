@@ -12,7 +12,6 @@ const useAppData = () => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [recipesFromDB, setRecipesFromDB] = useState([]); // user's saved/liked recipes
 
-
   useEffect(() => {
     fetch("http://localhost:8080/api/test")
       .then((res) => res.json())
@@ -21,12 +20,11 @@ const useAppData = () => {
   }, []);
 
   useEffect(() => {
-  const storedUserId = localStorage.getItem("userId");
-  if (storedUserId) {
-    setUserId(Number(storedUserId));
-  }
-}, []);
-
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(Number(storedUserId));
+    }
+  }, []);
 
   //handles state of liked recipes and should therefore update the DB/API too
   // when called later call like this toggleLikedStatus(recipe.id, recipe.url, recipe.image)
@@ -108,7 +106,7 @@ const useAppData = () => {
       );
 
       const openAIData = await openAIResponse.json();
-//    const queryString = openAIData.choices?.[0]?.message?.content || "";
+      //    const queryString = openAIData.choices?.[0]?.message?.content || "";
 
       let queryString = openAIData.choices?.[0]?.message?.content || "";
       queryString = queryString.replace(/^Search query:\s*/i, "").trim();
@@ -123,7 +121,7 @@ const useAppData = () => {
 
       console.log("OpenAI query:", queryString);
 
-      //use OpenAI to fetch from Edamam 
+      //use OpenAI to fetch from Edamam
       const edamamResponse = await fetch(
         "http://localhost:8080/api/recipes/search",
         {
@@ -137,7 +135,8 @@ const useAppData = () => {
       const edamamData = await edamamResponse.json();
       console.log("Edamam recipes: ", edamamData.hits);
 
-      const cleanedRecipes = edamamData.hits.slice(0, 3).map((hit, index) => ({    // VERIFY: this controls how many recipes are displayed
+      const cleanedRecipes = edamamData.hits.slice(0, 3).map((hit, index) => ({
+        // VERIFY: this controls how many recipes are displayed
         id: hit.recipe.url, //cant use an integer as it interacts with other users
         title: hit.recipe.label,
         description: hit.recipe.ingredientLines.slice(0, 3).join(", "), // VERIFY: this controls how many ingredients are displayed
@@ -147,6 +146,20 @@ const useAppData = () => {
 
       setRecipes(cleanedRecipes); // VERIFY: changed from edamamData.hits to cleanedRecipes to use transformed array
       console.log("Cleaned recipes set in state:", cleanedRecipes);
+
+      //-------------------------------------------------------------------------
+      //this is here as a test block to see if i can make the initial states of teh like button for new searches match the database information
+      //note that it works... leaving here until it can be tested to not have unexpeded interactions
+      const newStatusMap = {};
+      cleanedRecipes.forEach((recipe) => {
+        const isLiked = recipesFromDB.some(
+          (dbRecipe) => dbRecipe.url === recipe.url
+        );
+        newStatusMap[recipe.url] = isLiked ? "liked" : "notLiked";
+      //-------------------------------------------------------------------------
+      
+      });
+      setLikedStatus(newStatusMap);
     } catch (err) {
       console.error("Error in fetchRecipes:", err);
     }
