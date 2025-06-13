@@ -1,3 +1,4 @@
+import { useEffect } from "react"; // ⬅️ Import useEffect
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Main from "./components/Main";
@@ -5,17 +6,16 @@ import ModalComponent from "./components/Modal";
 import Header from "./components/Header";
 import useAppData from "./hooks/useAppData";
 import "./styles/main.scss";
-
 import User from "./components/User";
+import axios from "axios"; // ⬅️ Import axios
 
 function App() {
-  const user = "User 1"; //TEMPORARY HARDCODE FOR TESTING
   const {
     apiMessage,
     modalOpen,
     setModalOpen,
-    likedStatus, //pass down as a prop to users when we make the route (and import recipeFavButton)
-    toggleLikedStatus, //pass down as a prop to users when we make the route (and import recipeFavButton)
+    likedStatus,
+    toggleLikedStatus,
     recipes,
     setRecipes,
     fetchRecipes,
@@ -32,6 +32,21 @@ function App() {
     setSelectedRecipe,
   } = useAppData();
 
+  // ⬇️ Automatically fetch user info whenever userId is set
+  useEffect(() => {
+    if (userId) {
+      axios.get(`/api/users/${userId}`)
+        .then(res => {
+          setUserInfo(res.data);
+        })
+        .catch(err => {
+          console.error("Error fetching user info:", err);
+        });
+    } else {
+      setUserInfo(null); // Clear when logged out
+    }
+  }, [userId]);
+
   return (
     <Router>
       <div className="App">
@@ -43,8 +58,8 @@ function App() {
           setPrompt={setPrompt}
           setRecipes={setRecipes}
           setSubmitted={setSubmitted}
-        />{" "}
-        {/* renders Header at the top */}
+        />
+
         <Routes>
           <Route
             path="/login"
@@ -69,12 +84,17 @@ function App() {
               />
             }
           />
-
-          <Route path="/user/:id" element={<User />} />
-
-
-
+          <Route
+            path="/user/:id"
+            element={
+              <User
+                likedStatus={likedStatus}
+                toggleLikedStatus={toggleLikedStatus}
+              />
+            }
+          />
         </Routes>
+
         <ModalComponent
           show={modalOpen}
           onClose={() => setModalOpen(false)}

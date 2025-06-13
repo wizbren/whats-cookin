@@ -1,3 +1,6 @@
+-- DROP TABLE IF EXISTS recipes;
+-- DROP TABLE IF EXISTS users;
+
 CREATE TABLE Users (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -10,6 +13,6 @@ CREATE TABLE Recipes (
   user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
   url VARCHAR(255) NOT NULL,
   liked BOOLEAN NOT NULL DEFAULT true, --i think default true will make it so that we dont have to change the status when we like something, just when we unlike it
-  image TEXT NOT NULL
+  image TEXT NOT NULL,
   CONSTRAINT unique_user_url UNIQUE (user_id, url)
 );

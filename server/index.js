@@ -11,25 +11,28 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
-const recipesRoutes = require("./src/routes/recipes"); //Mounts custom Edamam route
-app.use("/api/recipes", recipesRoutes);  //VERIFY: should route searches through recipes.js
+const recipesRoutes = require("./src/routes/recipes"); // Mounts Edamam API route
+app.use("/api/recipes", recipesRoutes);
 
+// Basic test route
 app.get("/api/test", (req, res) => {
   res.json({ message: "Hello from Express!" });
 });
 
+// 🔵 GET full user info (name, all their recipes)
 app.get("/api/users/:id", async (req, res) => {
   const userId = req.params.id;
   try {
     const userResult = await pool.query("SELECT * FROM users WHERE id = $1", [
       userId,
     ]);
-    console.log("Running user query..."); //debugging
+    console.log("Running user query...");
+
     const recipeResult = await pool.query(
       "SELECT * FROM recipes WHERE user_id = $1",
       [userId]
     );
-    console.log("Running recipe query..."); //debugging
+    console.log("Running recipe query...");
 
     const user = userResult.rows[0];
     const recipes = recipeResult.rows;
@@ -41,6 +44,7 @@ app.get("/api/users/:id", async (req, res) => {
   }
 });
 
+// 🔵 POST new recipe
 app.post("/api/recipes", async (req, res) => {
   const { user_id, url, image } = req.body;
 
@@ -57,9 +61,9 @@ app.post("/api/recipes", async (req, res) => {
       [user_id, url, image]
     );
     if (result.rows.length > 0) {
-      res.status(201).json(result.rows[0]); // new row inserted
+      res.status(201).json(result.rows[0]);
     } else {
-      res.status(200).json({ message: "Recipe already exists" }); // duplicate, ignored
+      res.status(200).json({ message: "Recipe already exists" });
     }
   } catch (err) {
     console.error("❌ Error adding recipe:", err);
@@ -67,6 +71,7 @@ app.post("/api/recipes", async (req, res) => {
   }
 });
 
+// 🔵 DELETE recipe
 app.delete("/api/recipes/:id", async (req, res) => {
   const recipeId = req.params.id;
   const { user_id } = req.body;
@@ -92,12 +97,12 @@ app.delete("/api/recipes/:id", async (req, res) => {
   }
 });
 
-// route to get only liked recipes of a user
+// GET liked recipes only for a specific user (FIXED)
 app.get("/api/users/:id/liked-recipes", async (req, res) => {
   const userId = req.params.id;
   try {
-    const result = await db.query(
-      "SELECT * FROM Recipes WHERE user_id = $1 AND liked = true",
+    const result = await pool.query(
+      "SELECT * FROM recipes WHERE user_id = $1 AND liked = true",
       [userId]
     );
     res.json(result.rows);
@@ -107,7 +112,7 @@ app.get("/api/users/:id/liked-recipes", async (req, res) => {
   }
 });
 
-
+// Start server
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
