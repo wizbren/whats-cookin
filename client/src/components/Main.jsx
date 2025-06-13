@@ -15,6 +15,7 @@ const Main = (props) => {
     recipes,
     recipesFromDB,
     setRecipesFromDB,
+    isLoading,
   } = props; //use shared state + logic
 
   const handleChange = (event) => {
@@ -102,6 +103,12 @@ const Main = (props) => {
           Edit Your Search?
         </button>
       )}
+
+      {/* LOADING SPINNER BLOCK */}
+      {isLoading && (
+        <div className="loading-spinner">LOADING...</div>
+      )}
+
       <SearchResultList
         recipesFromSearch={recipesToRender}
         setModalOpen={setModalOpen}
