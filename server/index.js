@@ -26,7 +26,7 @@ app.get("/api/users/:id", async (req, res) => {
     ]);
     console.log("Running user query..."); //debugging
     const recipeResult = await pool.query(
-      "SELECT * FROM recipes WHERE user_id = $1",
+      "SELECT * FROM recipes WHERE user_id = $1 ORDER BY id DESC",
       [userId]
     );
     console.log("Running recipe query..."); //debugging
