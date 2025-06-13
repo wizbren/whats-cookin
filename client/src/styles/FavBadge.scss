@@ -1,3 +1,5 @@
+@import "./variables";
+
 .fav-badge {
   position: absolute;
   top: 8px;
@@ -5,7 +7,7 @@
   width: 32px;
   height: 32px;
   border-radius: 100%;
-  background-color: #eeeeee;
+  background-color: $modal;
   border: 2px solid #c80000; // default red
   display: flex;
   align-items: center;
@@ -14,6 +16,6 @@
   transition: border-color 0.2s ease;
 
   &.liked {
-    border-color: #03ac13; // green when liked
+    border-color: $border-color; // green when liked
   }
 }
