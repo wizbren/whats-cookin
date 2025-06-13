@@ -26,7 +26,8 @@ export default function Header(props) {
 
   const handleFavorites = () => {
     if (user) {
-      navigate(`/user/${user}`); // navigates to the user's liked recipes page
+      navigate(`/users/${user}`); // navigates to the user's liked recipes page
+      window.location.reload(); //need a refresh to render recipes
     } else {
       alert("Please log in to view your favorites");
     }
@@ -44,9 +45,9 @@ export default function Header(props) {
             Logout
           </button>
           {user && (
-            <Link to={`/users/${user}`}>
-              <button className="header-btn">Favorites</button>
-            </Link>
+            <button className="header-btn" onClick={handleFavorites}>
+              Favourites
+            </button>
           )}
           <button className="header-btn" onClick={() => setPrompt("")}>
             Clear Prompt

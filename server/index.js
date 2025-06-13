@@ -42,19 +42,19 @@ app.get("/api/users/:id", async (req, res) => {
 });
 
 app.post("/api/recipes", async (req, res) => {
-  const { user_id, url, image } = req.body;
+  const { user_id, url, image, title, description } = req.body;
 
-  if (!user_id || !url || !image) {
-    return res.status(400).json({ error: "Missing user_id, url, or image" });
+  if (!user_id || !url || !image || !title) {
+    return res.status(400).json({ error: "Missing required field(s)" });
   }
 
   try {
     const result = await pool.query(
-      `INSERT INTO recipes (user_id, url, image)
-      VALUES ($1, $2, $3)
+      `INSERT INTO recipes (user_id, url, image, title, description)
+      VALUES ($1, $2, $3, $4, $5)
       ON CONFLICT (user_id, url) DO NOTHING
       RETURNING *`,
-      [user_id, url, image]
+      [user_id, url, image, title, description]
     );
     if (result.rows.length > 0) {
       res.status(201).json(result.rows[0]); // new row inserted
