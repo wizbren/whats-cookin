@@ -1,9 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../styles/components/_header.scss";
 
 export default function Header(props) {
-  const { user, setUserId, userInfo, setUserInfo, setPrompt, setRecipes, setSubmitted } = props;
+  const {
+    user,
+    setUserId,
+    userInfo,
+    setUserInfo,
+    setPrompt,
+    setRecipes,
+    setSubmitted,
+  } = props;
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -35,7 +43,11 @@ export default function Header(props) {
           <button className="header-btn" onClick={handleLogout}>
             Logout
           </button>
-          <button className="header-btn">Favorites</button>
+          {user && (
+            <Link to={`/users/${user}`}>
+              <button className="header-btn">Favorites</button>
+            </Link>
+          )}
           <button className="header-btn" onClick={() => setPrompt("")}>
             Clear Prompt
           </button>
@@ -62,8 +74,6 @@ export default function Header(props) {
   );
 }
 
-
-
 // import React from "react";
 // import { useNavigate } from "react-router-dom";
 // import "../styles/components/_header.scss";
@@ -88,8 +98,6 @@ export default function Header(props) {
 //       alert("Please log in to view your favorites");
 //     }
 //   };
-
-
 
 //   return (
 //     <nav className="header">

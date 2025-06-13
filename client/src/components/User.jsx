@@ -1,33 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import UserLikeList from './UserLikeList';
 
-const User = () => {
-  const { id } = useParams(); // Extract user ID from route
-  const [recipes, setRecipes] = useState([]);
+const User = (props) => {
+  const {
+    prompt,
+    setPrompt,
+    fetchRecipes,
+    submitted,
+    setSubmitted,
+    recipesFromSearch,
+    setModalOpen,
+    setSelectedRecipe,
+    toggleLikedStatus,
+    likedStatus,
+    recipes,
+    recipesFromDB,
+    setRecipesFromDB,
+  } = props; //use shared state + logic
 
-  useEffect(() => {
-    axios.get(`http://localhost:8080/api/users/${id}/liked-recipes`)
-      .then(res => setRecipes(res.data))
-      .catch(err => console.error('Error fetching recipes:', err));
-  }, [id]);
+  const handleChange = (event) => {
+    setPrompt(event.target.value); // update string in shared prompt state
+  };
+
+  const handleSubmit = async (event) => {
+    // VERIFY: added async/await so that fetchRecipes finishes before setSubmitted is flagged as true
+    event.preventDefault(); // prevents page reload
+    await fetchRecipes(); //run recipe search (triggers OpenAI => Edamam logic)
+    setSubmitted(true);
+  };
+
+  const recipesToRender = recipes || []; //VERIFY
+  console.log("recipesToRender in Main.jsx:", recipesToRender); //debug log to check what recipes render
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>Liked Recipes</h2>
-      {recipes.length === 0 ? (
-        <p>No liked recipes found.</p>
-      ) : (
-        <ul>
-          {recipes.map(recipe => (
-            <li key={recipe.id} style={{ marginBottom: '1rem' }}>
-              <a href={recipe.url} target="_blank" rel="noopener noreferrer">
-                {recipe.url}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div
+      className="main-view"
+      style={{ backgroundImage: "url('/images/food.png')" }}
+    >
+      <UserLikeList
+        recipesFromSearch={recipesToRender}
+        setModalOpen={setModalOpen}
+        setSelectedRecipe={setSelectedRecipe}
+        toggleLikedStatus={toggleLikedStatus}
+        likedStatus={likedStatus}
+        recipesFromDB={recipesFromDB}
+      />
     </div>
   );
 };

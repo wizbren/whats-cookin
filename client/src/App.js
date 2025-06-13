@@ -30,6 +30,7 @@ function App() {
     recipesFromSearch,
     selectedRecipe,
     setSelectedRecipe,
+    recipesFromDB,
   } = useAppData();
 
   return (
@@ -70,10 +71,16 @@ function App() {
             }
           />
 
-          <Route path="/user/:id" element={<User />} />
-
-
-
+          <Route
+            path="/users/:id"
+            element={
+              <User
+                recipesFromDB={recipesFromDB}
+                likedStatus={likedStatus}
+                toggleLikedStatus={toggleLikedStatus}
+              />
+            }
+          />
         </Routes>
         <ModalComponent
           show={modalOpen}
