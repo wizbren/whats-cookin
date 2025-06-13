@@ -75,6 +75,7 @@ function App() {
             path="/users/:id"
             element={
               <User
+                setModalOpen={setModalOpen}
                 recipesFromDB={recipesFromDB}
                 likedStatus={likedStatus}
                 toggleLikedStatus={toggleLikedStatus}

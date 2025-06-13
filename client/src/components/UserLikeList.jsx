@@ -2,7 +2,6 @@ import UserLikeListItem from "./UserLikeListItem";
 
 const UserLikeList = (props) => {
   const {
-    recipesFromSearch,
     setModalOpen,
     setSelectedRecipe,
     toggleLikedStatus,
@@ -11,11 +10,10 @@ const UserLikeList = (props) => {
   } = props;
 
   return (
-    // VERIFY:ensures .map only runs if recipesFromSearch is actually an array
     <ul>
       {Array.isArray(recipesFromDB) &&
         recipesFromDB.map((recipe) => (
-          <userLikeListItem
+          <UserLikeListItem
             key={recipe.id}
             recipe={recipe}
             setModalOpen={setModalOpen}
