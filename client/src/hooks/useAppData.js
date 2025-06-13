@@ -11,6 +11,7 @@ const useAppData = () => {
   const [submitted, setSubmitted] = useState(false); //state for conditional rendering of form/button
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [recipesFromDB, setRecipesFromDB] = useState([]); // user's saved/liked recipes
+  const [isLoading, setIsLoading] = useState(false); // state for loading spinnerr
 
   useEffect(() => {
     fetch("http://localhost:8080/api/test")
@@ -81,6 +82,7 @@ const useAppData = () => {
   };
   const fetchRecipes = async () => {
     try {
+      setIsLoading(true);  //starts the loading spinner
       //uses OpenAI to convert a prompt into a search query
       const openAIResponse = await fetch(
         "https://api.openai.com/v1/chat/completions",
@@ -163,6 +165,8 @@ const useAppData = () => {
       setLikedStatus(newStatusMap);
     } catch (err) {
       console.error("Error in fetchRecipes:", err);
+    } finally {
+      setIsLoading(false);  //stops loading spinner, should run even with an error
     }
   };
 
@@ -225,6 +229,7 @@ const useAppData = () => {
     setSelectedRecipe,
     recipesFromDB,
     setRecipesFromDB,
+    isLoading,
   };
 };
 
