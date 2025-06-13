@@ -3,7 +3,7 @@ const FavIcon = ({ displayAlert, selected }) => {
     <svg
       width="21"
       height="18"
-      viewBox="-0.5 -1 24 19"
+      viewBox="-1.5 -1 24 19"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

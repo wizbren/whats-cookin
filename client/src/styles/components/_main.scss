@@ -46,3 +46,9 @@
 .edit-search-btn {
   margin: 1em;
 }
+
+.card-title { //this fixes the wrapping issues with long recipe titles
+  max-width: calc(100% - 40px);
+  word-wrap: break-word;
+  white-space: normal;
+}
