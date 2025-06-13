@@ -15,11 +15,11 @@ const User = (props) => {
       style={{ backgroundImage: "url('/images/food.png')" }}
     >
       <UserLikeList
+        recipesFromDB={recipesFromDB}
         setModalOpen={setModalOpen}
         setSelectedRecipe={setSelectedRecipe}
         toggleLikedStatus={toggleLikedStatus}
         likedStatus={likedStatus}
-        recipesFromDB={recipesFromDB}
       />
     </div>
   );

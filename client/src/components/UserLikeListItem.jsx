@@ -1,7 +1,13 @@
 import RecipeFavButton from "./RecipeFavButton";
 
 const UserLikeListItem = (props) => {
-  const { recipe, setModalOpen, setSelectedRecipe, toggleLikedStatus, likedStatus } = props;
+  const {
+    recipe,
+    setModalOpen,
+    setSelectedRecipe,
+    toggleLikedStatus,
+    likedStatus,
+  } = props;
 
   const handleCardClick = () => {
     setSelectedRecipe(recipe);
@@ -11,11 +17,11 @@ const UserLikeListItem = (props) => {
   return (
     <div
       className="card mb-3"
-      style={{ 
-        maxWidth: "540px", 
+      style={{
+        maxWidth: "540px",
         cursor: "pointer",
         border: "5px solid #148e01",
-       }}
+      }}
       onClick={handleCardClick}
     >
       <div className="row g-0">
@@ -34,7 +40,13 @@ const UserLikeListItem = (props) => {
                 recipeId={recipe.id}
                 liked={likedStatus?.[recipe.id] === "liked"}
                 toggleLikedStatus={() =>
-                  toggleLikedStatus(recipe.id, recipe.url, recipe.image)
+                  toggleLikedStatus(
+                    recipe.id,
+                    recipe.url,
+                    recipe.image,
+                    recipe.title,
+                    recipe.description
+                  )
                 }
               />
             </div>

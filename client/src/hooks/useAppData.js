@@ -28,7 +28,7 @@ const useAppData = () => {
 
   //handles state of liked recipes and should therefore update the DB/API too
   // when called later call like this toggleLikedStatus(recipe.id, recipe.url, recipe.image)
-  const toggleLikedStatus = (recipeId, url, image) => {
+  const toggleLikedStatus = (recipeId, url, image, title, description) => {
     console.log("Toggle called with:", { recipeId, url, image, userId }); //debugging
 
     const currentStatus = likedStatus[recipeId] || "notLiked";
@@ -45,6 +45,8 @@ const useAppData = () => {
           user_id: userId,
           url,
           image,
+          title, //added for user view
+          description, //added for user view
         }),
       })
         .then((res) => {
