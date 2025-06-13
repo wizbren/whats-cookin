@@ -11,5 +11,7 @@ CREATE TABLE Recipes (
   url VARCHAR(255) NOT NULL,
   liked BOOLEAN NOT NULL DEFAULT true, --i think default true will make it so that we dont have to change the status when we like something, just when we unlike it
   image TEXT NOT NULL
+  title VARCHAR(255) NOT NULL,
+  description TEXT
   CONSTRAINT unique_user_url UNIQUE (user_id, url)
 );
