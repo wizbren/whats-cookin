@@ -1,0 +1,63 @@
+@import "../_variables";
+
+.main-view {
+  background-color: $background;  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 220px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+}
+
+.prompt-form {
+  background-color: $modal;
+  padding: 0.25rem;
+  margin: 1em;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.prompt-textarea {
+  flex-grow: 1;
+  font-family: $font-base;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: none;
+  resize: none;
+  outline: none;
+  background-color: transparent;
+  color: $background;
+}
+
+.prompt-icon-btn {
+  background: none;
+  border: none;
+  color: $background;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.edit-search-btn {
+  margin-top: 2rem;
+  margin-bottom: 1em;
+}
+
+.edit-search-wrapper {
+  margin-top: 550px;    //header at 220px, this pushes it beneath
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.card-title { //this fixes the wrapping issues with long recipe titles
+  max-width: calc(100% - 40px);
+  word-wrap: break-word;
+  white-space: normal;
+}

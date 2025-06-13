@@ -1,9 +1,9 @@
 const FavIcon = ({ displayAlert, selected }) => {
   return (
     <svg
-      width="20"
-      height="17"
-      viewBox="0 0 24 19"
+      width="21"
+      height="18"
+      viewBox="-1.5 -1 24 19"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -15,16 +15,6 @@ const FavIcon = ({ displayAlert, selected }) => {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      {!!displayAlert && (
-        <circle
-          cx="21"
-          cy="4"
-          r="2.75"
-          fill="#03AC13"
-          stroke="#C80000"
-          strokeWidth="0.5"
-        />
-      )}
     </svg>
   );
 };
