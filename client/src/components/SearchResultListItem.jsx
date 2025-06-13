@@ -20,7 +20,7 @@ const SearchResultListItem = (props) => {
       style={{
         maxWidth: "540px",
         cursor: "pointer",
-        border: "5px solid #148e01",
+        border: "5px solid #71e962",
         background:" #3b9bc0",
        }}
       onClick={handleCardClick}
