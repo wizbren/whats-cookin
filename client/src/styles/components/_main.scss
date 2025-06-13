@@ -17,6 +17,10 @@
   overflow-y: auto; // allows scroll if needed
 }
 
+.main-view ul {
+  padding-left: 0;
+}
+
 .prompt-form {
   background-color: $modal;
   padding: 0.25rem;
