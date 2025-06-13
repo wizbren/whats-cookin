@@ -15,6 +15,7 @@ const SearchResultListItem = (props) => {
         maxWidth: "540px", 
         cursor: "pointer",
         border: "5px solid #148e01",
+        background:" #3b9bc0",
        }}
       onClick={handleCardClick}
     >
