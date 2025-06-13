@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/components/_header.scss";
 
 export default function Header(props) {
@@ -13,6 +13,8 @@ export default function Header(props) {
     setSubmitted,
   } = props;
   const navigate = useNavigate();
+  const location = useLocation();
+  const isOnFavoritesPage = location.pathname.startsWith(`/users/`);
 
   const handleLogout = () => {
     setUserId(null);
@@ -44,11 +46,16 @@ export default function Header(props) {
           <button className="header-btn" onClick={handleLogout}>
             Logout
           </button>
-          {user && (
+          {isOnFavoritesPage ? (
+            <button className="header-btn" onClick={() => navigate("/")}>
+              Home
+            </button>
+          ) : (
             <button className="header-btn" onClick={handleFavorites}>
               Favourites
             </button>
           )}
+
           <button className="header-btn" onClick={() => setPrompt("")}>
             Clear Prompt
           </button>
