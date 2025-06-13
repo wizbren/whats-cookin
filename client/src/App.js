@@ -31,6 +31,7 @@ function App() {
     selectedRecipe,
     setSelectedRecipe,
     recipesFromDB,
+    isLoading,
   } = useAppData();
 
   return (
@@ -67,6 +68,7 @@ function App() {
                 setModalOpen={setModalOpen}
                 setSelectedRecipe={setSelectedRecipe}
                 recipes={recipes}
+                isLoading={isLoading} // loading spinner
               />
             }
           />
