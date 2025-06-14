@@ -30,7 +30,7 @@ const SearchResultListItem = (props) => {
           <img
             src={recipe.image}
             alt={recipe.title}
-            className="img-fluid rounded-start"
+            className="img-fluid"
           />
         </div>
         <div className="col-md-8">
