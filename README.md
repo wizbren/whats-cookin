@@ -59,7 +59,7 @@ This will:
 
 Seed the data using:
 ```
-psql -d whatscookin -f src/db/seed.sql
+psql -d whatscookin -f src/db/mockdata.sql
 ```
 
 ### Make sure BOTH your client AND server directories have their own .env files that include the following:
@@ -102,13 +102,6 @@ node index.js || npm start || npm run dev
 
 cd client
 npm start
-
-### 6. Database Setup
-
-createdb db
-psql -d db -f server/src/db/schema.sql
-psql -d db -f server/src/db/mockdata.sql
-
 
 ## Preview
 
